@@ -1,0 +1,158 @@
+PROMPT DOCTOR CLINIC NEW VERSION : 
+
+
+(i do not need modules i need normal package)
+(web can see domain)
+(web can see service , service can see repo , repo can see domain , service can see domain )
+
+
+
+
+Project Setup : 
+	spring boot 4.0.4,
+	java 21, 
+	maven ,
+	mongo , 
+	lombook
+
+connection string : mongodb+srv://maamoun:Vav872iQ74j8Nt7I@cluster0.kzyga82.mongodb.net/
+collection : schedules
+collection : users
+
+
+
+PATH : 
+com.doctorpoint
+	|_auth
+	|_domain
+	|_http
+	|_tts
+	|_websocket
+	|_Application.java
+	|_security
+
+Point of Start :
+	collections : 
+		in the domain package create Schedules object : 
+		startdatetime 
+		type
+		duration
+		fees
+		notes
+		phoneNumber
+		phoneNumber2
+		firstName 
+		lastName
+		endDateTime (this calculated)
+		!!i mean by startDate : startDateTime(day and time) so you can change it and the same  for endDate(day and time and duration)	
+	users : extends userDetails 
+		username , 
+		password ,
+		roleName
+
+	!! The Domain should be complete so any business validation i will said after you should create a method for it. 
+
+
+Response / Output Behavior, this response is  for whole app: 
+	record object for response this object should be  return {
+	success : boolean ,
+	data : ,
+	message : }
+	create a object for response and util function to create a instance for it 
+
+
+REST FULL API : 
+	see the postman collection and create RESTFUL API : 
+	!!! the appointment name should be converted to schedule name and appointment type to type !!! 
+
+	create 3 layer controller -call-> service -call-> repo
+	web layer can see the domain layer 
+		
+	
+VALIDATION : 
+	use spring web validation 
+	use the right validation based on rfc for the fields of domains
+	
+
+
+Business Roles & services: 
+	*create appointment api : 
+		- current datetime + duration should not collise with start or end date time, 
+		  if collision is done fetch closest available start time 
+	!successor is the start time of next previous scheduled for the current date time , 
+	!predecessor is the end of previous scheduled compared for the current date time 
+
+		step 1- get all the appointment in that match in the same day of date time 
+		we should hold the main date time entered coming from api
+		create a message attribute that should be  concatinate along of the recursivity : 
+		
+		step 2- base case 1 : if no predecessor and no successor schedule and return success message with success status
+		- base case 2 : if no predecessor but successor exist :  
+			.. check if  date time + duration collise with start date of successor : 
+				... no collise :  schedule 
+				... else : call a function to found a predecessor and successor 
+		- base case 3 : if predecessor exist  but no successor :
+			.. check if end date of predecessor collise with date time : 
+				... no collise : schedule 
+			 	... else : call a function to found a predecessor and successor
+		- base case 4 : predecessor and successor exist 
+			.. check if end date of predecessor collise with date time or check if  date time + duration collise with start date of successor : 
+				... no collise L schedule 
+				... else : call a function to found a predecessor and successor
+
+		if we have a collision in one of the last three so then the goal is not schedule but it is to return a message with start and end time that the user can schedule in this day 
+
+
+		function found a predecessor and successor : return a object that contain a Set  of available schedule that just contain start and end date time  
+			- base case 0 : if move to another day that the principale day that he need to schedule on stop.
+			- call the same check function with datetime = successor end date time + duration of the need schedule 
+			- call the same check function with datetime = predecessor start time - duration 
+			- base case 2 : if no predecessor but successor exist :  
+				.. check if  date time + duration collise with start date of successor : 
+					... no collise :  add to the list 
+
+			- base case 3 : if predecessor exist  but no successor :
+				.. check if end date of predecessor collise with date time : 
+					... no collise : add to the list 
+
+			- base case 4 : predecessor and successor exist 
+				.. check if end date of predecessor collise with date time or check if  date time + duration collise with start date of successor : 
+					... no collise : add to the list 
+
+		the collision check function should be in the domain ,
+		
+
+	* for update appointment we should do the same with remove the schedule with same id from the list that we store after fetch (compared with step1 in create)
+
+	* no business rules for other api just call repo with validate the dto if needed.
+
+
+	* for now do not implement set password and reset password. 
+
+	* Login : 
+		- use the default  spring security  implementation  just override the UserDetailsService. 
+	
+Security : 
+	use jwt .
+	create jwtService : 
+		- extract token 
+		- validate signature 
+		- extract username 
+		- extract role 
+		- extract authorities 
+		- extract all information 
+		- createJwt
+		- create payload 
+		...
+	create Security Filter chain in securoty config , the Login Process should not passed to the path of this security filter chain it was public , 
+	override the unsuccessful method in UsernamePasswordAuthenticationFilter and return the same response format ! 
+	and the same for success return the same response format ! 
+	create AuthenticationFitler that extends OncePerRequestFilter to check if  the token exist or not in header also check if valid calling  jwtService
+
+
+
+
+
+FrontEnd : 
+Frontend TTS (Browser-based)
+Using the Web Speech API (built into browsers) — completely free:

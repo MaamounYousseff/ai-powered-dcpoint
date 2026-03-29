@@ -1,0 +1,249 @@
+Test Case 1: No Existing Scheduling (Base Case 1)
+{
+    "datetime": "2026-04-01T10:00:00",
+    "type": "CONSULTATION",
+    "duration": 30,
+    "fees": 150.00,
+    "notes": "Initial consultation",
+    "phoneNumber": "1234567890",
+    "phoneNumber2": "0987654321",
+    "firstName": "John",
+    "lastName": "Doe"
+}
+Expected: SUCCESS
+State After:
+- 10:00:00-10:30:00 (John Doe - CONSULTATION)
+
+---
+
+Test Case 2: No Predecessor, Has Successor - No Collision
+{
+    "datetime": "2026-04-01T09:00:00",
+    "type": "CHECKUP",
+    "duration": 30,
+    "fees": 100.00,
+    "notes": "Morning checkup before John Doe",
+    "phoneNumber": "2345678901",
+    "phoneNumber2": "1876543210",
+    "firstName": "Jane",
+    "lastName": "Smith"
+}
+Expected: SUCCESS
+State After:
+- 09:00:00-09:30:00 (Jane Smith - CHECKUP)
+- 10:00:00-10:30:00 (John Doe - CONSULTATION)
+
+---
+
+Test Case 3: No Predecessor, Has Successor - With Collision
+{
+    "datetime": "2026-04-01T09:45:00",
+    "type": "FOLLOW_UP",
+    "duration": 30,
+    "fees": 120.00,
+    "notes": "This should cause collision with John Doe (successor)",
+    "phoneNumber": "4567890123",
+    "phoneNumber2": "2765432109",
+    "firstName": "Bob",
+    "lastName": "Wilson"
+}
+Expected: CONFLICT - Return alternative slots
+State After: NO CHANGE (collision occurred)
+- 09:00:00-09:30:00 (Jane Smith - CHECKUP)
+- 10:00:00-10:30:00 (John Doe - CONSULTATION)
+
+---
+
+Test Case 4: Has Predecessor, No Successor - No Collision
+{
+    "datetime": "2026-04-01T15:00:00",
+    "type": "THERAPY",
+    "duration": 45,
+    "fees": 180.00,
+    "notes": "Afternoon therapy session after John Doe - no successor",
+    "phoneNumber": "5678901234",
+    "firstName": "Alice",
+    "lastName": "Brown"
+}
+Expected: SUCCESS
+State After:
+- 09:00:00-09:30:00 (Jane Smith - CHECKUP)
+- 10:00:00-10:30:00 (John Doe - CONSULTATION)
+- 15:00:00-15:45:00 (Alice Brown - THERAPY)
+
+---
+
+Test Case 5: Has Predecessor, No Successor - With Collision
+{
+    "datetime": "2026-04-01T15:30:00",
+    "type": "EMERGENCY",
+    "duration": 45,
+    "fees": 300.00,
+    "notes": "Emergency case - collision with Alice Brown (15:00-15:45)",
+    "phoneNumber": "7890123456",
+    "phoneNumber2": "3654321098",
+    "firstName": "Charlie",
+    "lastName": "Davis"
+}
+Expected: CONFLICT - Return alternative slots
+State After: NO CHANGE (collision occurred)
+- 09:00:00-09:30:00 (Jane Smith - CHECKUP)
+- 10:00:00-10:30:00 (John Doe - CONSULTATION)
+- 15:00:00-15:45:00 (Alice Brown - THERAPY)
+
+---
+
+Test Case 6: Has Both Predecessor and Successor - No Collision
+{
+    "datetime": "2026-04-01T11:00:00",
+    "type": "CONSULTATION",
+    "duration": 30,
+    "fees": 150.00,
+    "notes": "Between John Doe (10:00-10:30) and Alice Brown (15:00-15:45) - should fit",
+    "phoneNumber": "8901234567",
+    "firstName": "Diana",
+    "lastName": "Evans"
+}
+Expected: SUCCESS
+State After:
+- 09:00:00-09:30:00 (Jane Smith - CHECKUP)
+- 10:00:00-10:30:00 (John Doe - CONSULTATION)
+- 11:00:00-11:30:00 (Diana Evans - CONSULTATION)
+- 15:00:00-15:45:00 (Alice Brown - THERAPY)
+
+---
+
+Test Case 7: Has Both Predecessor and Successor - Collision with Predecessor
+{
+    "datetime": "2026-04-01T10:15:00",
+    "type": "URGENT_CARE",
+    "duration": 45,
+    "fees": 250.00,
+    "notes": "Urgent care - overlaps with John Doe (10:00-10:30)",
+    "phoneNumber": "1357924680",
+    "phoneNumber2": "4543210987",
+    "firstName": "Frank",
+    "lastName": "Green"
+}
+Expected: CONFLICT - Return alternative slots
+State After: NO CHANGE (collision occurred)
+- 09:00:00-09:30:00 (Jane Smith - CHECKUP)
+- 10:00:00-10:30:00 (John Doe - CONSULTATION)
+- 11:00:00-11:30:00 (Diana Evans - CONSULTATION)
+- 15:00:00-15:45:00 (Alice Brown - THERAPY)
+
+---
+
+Test Case 8: Has Both Predecessor and Successor - Collision with Successor
+{
+    "datetime": "2026-04-01T10:45:00",
+    "type": "SPECIALIST",
+    "duration": 30,
+    "fees": 350.00,
+    "notes": "Specialist consultation - overlaps with Diana Evans (11:00-11:30)",
+    "phoneNumber": "2468135790",
+    "firstName": "Grace",
+    "lastName": "Hill"
+}
+Expected: CONFLICT - Return alternative slots
+State After: NO CHANGE (collision occurred)
+- 09:00:00-09:30:00 (Jane Smith - CHECKUP)
+- 10:00:00-10:30:00 (John Doe - CONSULTATION)
+- 11:00:00-11:30:00 (Diana Evans - CONSULTATION)
+- 15:00:00-15:45:00 (Alice Brown - THERAPY)
+
+---
+
+Test Case 9: Available Slot Between Existing Scheduling 
+{
+    "datetime": "2026-04-01T12:00:00",
+    "type": "CONSULTATION",
+    "duration": 60,
+    "fees": 175.00,
+    "notes": "Should fit between Diana Evans (11:00-11:30) and Alice Brown (15:00-15:45)",
+    "phoneNumber": "5555555555",
+    "phoneNumber2": "6666666666",
+    "firstName": "Henry",
+    "lastName": "Johnson"
+}
+Expected: SUCCESS
+State After:
+- 09:00:00-09:30:00 (Jane Smith - CHECKUP)
+- 10:00:00-10:30:00 (John Doe - CONSULTATION)
+- 11:00:00-11:30:00 (Diana Evans - CONSULTATION)
+- 12:00:00-13:00:00 (Henry Johnson - CONSULTATION)
+- 15:00:00-15:45:00 (Alice Brown - THERAPY)
+
+---
+
+Test Case 10: Edge Case - Same Start Time as Existing
+{
+    "datetime": "2026-04-01T10:00:00",
+    "type": "EMERGENCY",
+    "duration": 30,
+    "fees": 300.00,
+    "notes": "Emergency - exact same start time as John Doe (10:00-10:30)",
+    "phoneNumber": "7777777777",
+    "firstName": "Ivy",
+    "lastName": "King"
+}
+Expected: CONFLICT - Return alternative slots
+State After: NO CHANGE (collision occurred)
+- 09:00:00-09:30:00 (Jane Smith - CHECKUP)
+- 10:00:00-10:30:00 (John Doe - CONSULTATION)
+- 11:00:00-11:30:00 (Diana Evans - CONSULTATION)
+- 12:00:00-13:00:00 (Henry Johnson - CONSULTATION)
+- 15:00:00-15:45:00 (Alice Brown - THERAPY)
+
+---------------------------------------------------------------
+---------------------------------------------------------------
+DONE 
+---------------------------------------------------------------
+---------------------------------------------------------------
+
+Test Case 11: Early Morning Slot -- NOT IMPLEMENTED YET -- NOT ASKED BY CUSTOMER
+{
+    "datetime": "2026-04-01T08:00:00",
+    "type": "QUICK_CHECK",
+    "duration": 15,
+    "fees": 75.00,
+    "notes": "Quick 15-minute check before Jane Smith (09:00-09:30) - no predecessor",
+    "phoneNumber": "8888888888",
+    "firstName": "Jack",
+    "lastName": "Lee"
+}
+Expected: SUCCESS
+State After:
+- 08:00:00-08:15:00 (Jack Lee - QUICK_CHECK)
+- 09:00:00-09:30:00 (Jane Smith - CHECKUP)
+- 10:00:00-10:30:00 (John Doe - CONSULTATION)
+- 11:00:00-11:30:00 (Diana Evans - CONSULTATION)
+- 12:00:00-13:00:00 (Henry Johnson - CONSULTATION)
+- 15:00:00-15:45:00 (Alice Brown - THERAPY)
+
+---
+
+Test Case 12: Late Evening Slot -- NOT IMPLEMENTED YET -- NOT ASKED BY CUSTOMER
+{
+    "datetime": "2026-04-01T17:00:00",
+    "type": "SURGERY_CONSULTATION",
+    "duration": 120,
+    "fees": 500.00,
+    "notes": "Extended surgery consultation after Alice Brown (15:00-15:45) - no successor",
+    "phoneNumber": "9999999999",
+    "phoneNumber2": "1010101010",
+    "firstName": "Kelly",
+    "lastName": "Moore"
+}
+Expected: SUCCESS
+State After:
+- 08:00:00-08:15:00 (Jack Lee - QUICK_CHECK)
+- 09:00:00-09:30:00 (Jane Smith - CHECKUP)
+- 10:00:00-10:30:00 (John Doe - CONSULTATION)
+- 11:00:00-11:30:00 (Diana Evans - CONSULTATION)
+- 12:00:00-13:00:00 (Henry Johnson - CONSULTATION)
+- 15:00:00-15:45:00 (Alice Brown - THERAPY)
+- 17:00:00-19:00:00 (Kelly Moore - SURGERY_CONSULTATION)
+
+---
+

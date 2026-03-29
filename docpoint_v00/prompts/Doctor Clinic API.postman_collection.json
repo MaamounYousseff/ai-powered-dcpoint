@@ -1,0 +1,290 @@
+{
+  "info": {
+    "_postman_id": "5bfb8fe0-5cc4-4d21-bcba-a67b8b212437",
+    "name": "Doctor Clinic API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "38810184",
+    "_collection_link": "https://go.postman.co/collection/38810184-5bfb8fe0-5cc4-4d21-bcba-a67b8b212437?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Doctor",
+      "item": [
+        {
+          "name": "Set Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"password\": \"yourpassword123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/doctor/set_password",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "doctor",
+                "set_password"
+              ]
+            },
+            "description": "Sets the doctor's password for the first time. Will fail if a password is already set."
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"password\": \"yourpassword123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/doctor/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "doctor",
+                "login"
+              ]
+            },
+            "description": "Authenticates the doctor and sets an httpOnly access_token cookie."
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"old_password\": \"yourpassword123\",\n  \"new_password\": \"newsecurepassword456\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/doctor/reset_password",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "doctor",
+                "reset_password"
+              ]
+            },
+            "description": "Resets the doctor's password after verifying the old one."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Schedule",
+      "item": [
+        {
+          "name": "Get All Appointments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/appointment/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "appointment",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Appointments by Filter",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/appointment/filter?start_date=2024-01-01&end_date=2024-12-31",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "appointment",
+                "filter"
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "2024-01-01",
+                  "description": "Start date (YYYY-MM-DD)"
+                },
+                {
+                  "key": "end_date",
+                  "value": "2024-12-31",
+                  "description": "End date (YYYY-MM-DD)"
+                },
+                {
+                  "key": "appointment_type",
+                  "value": "",
+                  "description": "Filter by type",
+                  "disabled": true
+                },
+                {
+                  "key": "min_fees",
+                  "value": "",
+                  "description": "Minimum fees",
+                  "disabled": true
+                },
+                {
+                  "key": "max_fees",
+                  "value": "",
+                  "description": "Maximum fees",
+                  "disabled": true
+                },
+                {
+                  "key": "patient_name",
+                  "value": "",
+                  "description": "Filter by patient name",
+                  "disabled": true
+                },
+                {
+                  "key": "patient_phone",
+                  "value": "",
+                  "description": "Filter by patient phone number",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Appointment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"datetime\": \"2024-06-15T10:00:00\",\n  \"appointment_type\": \"surgery\",\n  \"duration\": 30,\n  \"fees\": 100,\n  \"notes\": \"Follow-up visit\",\n  \"phone_number\": 1234567890,\n  \"phone_number2\": null,\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\"\n}\n\n// IMPROVEMENT : add middle Name or just eliminate the last Name \n\n// IMPROVEMENMT : ELIMINATE DURATION, SO THE BACKEND SHOULD CHECK FOR THE TIME OF SCHEDULING TYPE \n\n// UNIT TEST : FAIL IF A TAKED DATE TIME + THAT SCHEDULING TYPE TIME CORRUPT WITH THIS DATETIME\n\n// UNIT TEST : FAIL IF THIS DATE TIME + THIS SCHUDLING TYPE TIME CORRUPT WITH A TAKED DATE TIME"
+            },
+            "url": {
+              "raw": "{{base_url}}/appointment/create",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "appointment",
+                "create"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Appointment by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/appointment/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "appointment",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Appointment",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"datetime\": \"2024-06-15T11:00:00\",\n  \"appointment_type\": \"online\",\n  \"duration\": 45,\n  \"fees\": 120,\n  \"notes\": \"Rescheduled follow-up\",\n  \"phone_number\": 1234567890,\n  \"phone_number2\": null,\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/appointment/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "appointment",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "your_jwt_token_here",
+      "type": "string"
+    }
+  ]
+}

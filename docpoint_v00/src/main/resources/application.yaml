@@ -1,0 +1,12 @@
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://maamoun:Vav872iQ74j8Nt7I@cluster0.kzyga82.mongodb.net/docpointdb
+
+jwt:
+  secret: ${JWT_SECRET:mySecretKeyForDoctorClinicAppThatIsLongEnoughToBeSecure123456789}
+  expiration: 86400000 # 24 hours
+
+server:
+  port: 8000
