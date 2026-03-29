@@ -1,0 +1,107 @@
+/* ============================================================
+   SchedulingMain.css
+   Color palette:
+     --clinic-navy  : #1B3A5C   (deep trust blue)
+     --clinic-sage  : #4A9B8E   (calm teal-green)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+/* ── CSS Variables ─────────────────────────────────────────── */
+:root {
+  --clinic-navy        : #1B3A5C;
+  --clinic-navy-light  : #254d78;
+  --clinic-navy-faint  : #eef2f7;
+  --clinic-sage        : #4A9B8E;
+  --clinic-sage-light  : #6ab8ac;
+  --clinic-sage-faint  : #f3faf9;
+  --clinic-white       : #ffffff;
+  --clinic-surface     : #f7fafc;
+  --clinic-border      : #d6e4ef;
+  --clinic-text        : #1a2e40;
+  --clinic-text-muted  : #5a7a94;
+  --clinic-shadow-sm   : 0 2px 8px rgba(27, 58, 92, 0.08);
+  --clinic-shadow-md   : 0 6px 24px rgba(27, 58, 92, 0.12);
+  --radius-sm          : 8px;
+  --radius-md          : 12px;
+  --radius-lg          : 18px;
+  --font-display       : 'DM Serif Display', Georgia, serif;
+  --font-body          : 'DM Sans', sans-serif;
+  --transition         : 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#root {
+  margin: 0 0;
+  padding: 0 0 ;
+}
+
+body{
+  background-color: var(--clinic-border);
+}
+
+/*SHARED  */
+.header_2{
+    display: flex;
+    gap: 8px;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.header_3{
+    font-size: 16px;
+    font-weight: 450;
+}
+
+.mb_10{
+  margin-bottom: 10px;
+}
+
+.mb_15{
+  margin-bottom: 15px;
+}
+
+.mb_2{
+  margin-bottom:2px;
+}
+
+.mt_2{
+  margin-top:2px;
+}
+
+.mt_4{
+  margin-top:4px;
+}
+
+.mt_10{
+  margin-top:10px;
+}
+
+.mb_4{
+  margin-bottom:4px;
+}
+
+
+.px-24{
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.py-10{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.py-24{
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.py-32{
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.py-40{
+  padding-top: 40px;
+  padding-bottom: 40px;
+}

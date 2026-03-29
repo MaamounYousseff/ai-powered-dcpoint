@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+cd DocPoint || exit 1
+echo "🚀 Running CommitLint before commit..."
+npx --no-install commitlint --edit "$1"

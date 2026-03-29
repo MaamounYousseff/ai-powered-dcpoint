@@ -1,0 +1,133 @@
+.sch-view-header{
+  background-color: var(--clinic-navy-faint);
+  font-family: var(--font-body);
+  color: var(--clinic-text);
+  width: auto;
+}
+
+
+
+.sch-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 10px;
+  background: var(--clinic-navy);
+  box-shadow: var(--clinic-shadow-md);
+}
+
+.sch-view-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--clinic-white);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.sch-view-title svg {
+  color: var(--clinic-sage-light);
+}
+
+.sch-view-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Override MUI Autocomplete to match navy header */
+.sch-view-filters .MuiOutlinedInput-root {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-sm);
+  color: var(--clinic-white);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  transition: background var(--transition);
+}
+
+.sch-view-filters .MuiOutlinedInput-root:hover {
+  background: rgba(255, 255, 255, 0.13);
+}
+
+.sch-view-filters .MuiOutlinedInput-root.Mui-focused {
+  background: rgba(255, 255, 255, 0.13);
+}
+
+.sch-view-filters .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.sch-view-filters .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--clinic-sage-light) !important;
+}
+
+.sch-view-filters .MuiInputLabel-root {
+  color: rgba(255, 255, 255, 0.55);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+}
+
+.sch-view-filters .MuiInputLabel-root.Mui-focused {
+  color: var(--clinic-sage-light);
+}
+
+.sch-view-filters .MuiSvgIcon-root {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 480px) {
+  .sch-header {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 12px;
+    border-radius: 10px;
+  }
+
+  .sch-view-filters {
+    width: 100%;
+  }
+
+  .sch-view-filters .MuiAutocomplete-root {
+    flex: 1;
+  }
+
+  .sch-view-title{
+    display: none;
+  }
+
+}
+
+
+@media (min-width: 768px) {
+    .sch-header {
+        margin: 0 44px;
+    }
+}
+
+
+@media (min-width: 1280px) {
+
+
+    .sch-header {
+        margin: 0 72px;
+    }
+}
+
+
+
+@media (min-width: 1600px) {
+    .sch-header {
+        margin: 0 100px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .sch-header {
+        margin: 0 140px;
+    }
+}

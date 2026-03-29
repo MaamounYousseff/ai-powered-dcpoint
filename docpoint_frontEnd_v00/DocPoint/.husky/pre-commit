@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+cd DocPoint || exit 1
+echo "🚀 Running ESLint before commit..."
+npm run lint

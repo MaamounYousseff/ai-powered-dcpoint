@@ -1,0 +1,297 @@
+/* ── CSS Variables ─────────────────────────────────────────── */
+:root {
+  --clinic-navy        : #1B3A5C;
+  --clinic-navy-light  : #254d78;
+  --clinic-navy-faint  : #eef2f7;
+  --clinic-sage        : #4A9B8E;
+  --clinic-sage-light  : #6ab8ac;
+  --clinic-sage-faint  : #f3faf9;
+  --clinic-white       : #ffffff;
+  --clinic-surface     : #f7fafc;
+  --clinic-border      : #d6e4ef;
+  --clinic-text        : #1a2e40;
+  --clinic-text-muted  : #5a7a94;
+  --clinic-shadow-sm   : 0 2px 8px rgba(27, 58, 92, 0.08);
+  --clinic-shadow-md   : 0 6px 24px rgba(27, 58, 92, 0.12);
+  --radius-sm          : 8px;
+  --radius-md          : 12px;
+  --radius-lg          : 18px;
+  --font-display       : 'DM Serif Display', Georgia, serif;
+  --font-body          : 'DM Sans', sans-serif;
+  --transition         : 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Top-level shell ───────────────────────────── */
+.login-root {
+  display: flex;
+  width: 100vw;
+  max-width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  font-family: var(--font-body);
+  box-sizing: border-box;
+}
+
+/* ── Left panel ────────────────────────────────── */
+.login-left {
+  flex: 1;
+  background: linear-gradient(160deg, var(--clinic-navy) 0%, var(--clinic-navy-light) 55%, var(--clinic-sage) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative background circles */
+.login-left::before {
+  content: '';
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: rgba(74, 155, 142, 0.15);
+  top: -100px;
+  right: -120px;
+  pointer-events: none;
+}
+
+.login-left::after {
+  content: '';
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  bottom: -60px;
+  left: -60px;
+  pointer-events: none;
+}
+
+.login-left__content {
+  color: var(--clinic-white);
+  max-width: 380px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Icon badge */
+.login-left__icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 28px;
+  backdrop-filter: blur(8px);
+}
+
+.login-left__tagline {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0 0 20px;
+  letter-spacing: -0.3px;
+}
+
+.login-left__tagline span {
+  color: var(--clinic-sage-light);
+}
+
+.login-left__sub {
+  font-size: 1rem;
+  opacity: 0.78;
+  line-height: 1.7;
+  margin: 0 0 40px;
+}
+
+/* Feature pills */
+.login-left__features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-left__feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.88rem;
+  opacity: 0.85;
+}
+
+.login-left__feature-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--clinic-sage-light);
+  flex-shrink: 0;
+}
+
+/* ── Right panel ───────────────────────────────── */
+.login-right {
+  width: 480px;
+  max-width: 100%;
+  flex-shrink: 0;
+  background: var(--clinic-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  box-shadow: -8px 0 32px rgba(27, 58, 92, 0.10);
+  box-sizing: border-box;
+}
+
+/* ── Tablet (≤ 1024px) ─────────────────────────── */
+@media (max-width: 1024px) {
+  .login-left {
+    padding: 40px 36px;
+  }
+
+  .login-left__tagline {
+    font-size: 2rem;
+  }
+
+  .login-left__sub {
+    font-size: 0.95rem;
+    margin-bottom: 28px;
+  }
+
+  .login-right {
+    width: 400px;
+    max-width: 100%;
+    padding: 40px 36px;
+    box-sizing: border-box;
+  }
+}
+
+/* ── Small tablet / large phone (≤ 768px) ─────── */
+@media (max-width: 768px) {
+  .login-root {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow: auto;
+  }
+
+  /* Left panel becomes a compact header banner */
+  .login-left {
+    flex: none;
+    width: 100%;
+    padding: 40px 28px 36px;
+    align-items: flex-start;
+  }
+
+  .login-left::before {
+    width: 280px;
+    height: 280px;
+    top: -80px;
+    right: -80px;
+  }
+
+  .login-left::after {
+    width: 180px;
+    height: 180px;
+    bottom: -50px;
+    left: -40px;
+  }
+
+  .login-left__icon-wrap {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 20px;
+  }
+
+  .login-left__tagline {
+    font-size: 1.85rem;
+    margin-bottom: 14px;
+  }
+
+  .login-left__sub {
+    font-size: 0.92rem;
+    margin-bottom: 24px;
+  }
+
+  /* Hide feature list on small screens to keep banner compact */
+  .login-left__features {
+    display: none;
+  }
+
+  /* Right panel becomes full-width below */
+  .login-right {
+    width: 100%;
+    max-width: 100%;
+    flex-shrink: unset;
+    box-shadow: none;
+    padding: 40px 28px 48px;
+    background: var(--clinic-surface);
+    box-sizing: border-box;
+  }
+}
+
+/* ── Phone (≤ 480px) ───────────────────────────── */
+@media (max-width: 480px) {
+  .login-root {
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Hide left panel entirely on phone */
+  .login-left {
+    display: none;
+  }
+
+  /* Right panel takes full screen */
+  .login-right {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    flex: 1;
+    padding: 40px 20px;
+    box-shadow: none;
+    background: var(--clinic-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    overflow-y: auto;
+  }
+
+  .login-right > div {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Override MUI TextField colors */
+.login-right .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--clinic-sage);
+}
+.login-right .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--clinic-navy);
+}
+.login-right .MuiInputLabel-root.Mui-focused {
+  color: var(--clinic-navy);
+}
+.login-right .MuiButton-containedPrimary {
+  background-color: var(--clinic-navy);
+  border-radius: var(--radius-sm);
+  text-transform: none;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 12px;
+  transition: background var(--transition);
+}
+.login-right .MuiButton-containedPrimary:hover {
+  background-color: var(--clinic-navy-light);
+}
+.login-right .MuiLink-root {
+  color: var(--clinic-sage);
+  font-size: 0.875rem;
+}

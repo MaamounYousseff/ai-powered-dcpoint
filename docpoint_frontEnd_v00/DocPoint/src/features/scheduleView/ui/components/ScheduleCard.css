@@ -1,0 +1,207 @@
+/* ============================================================
+   ScheduleCard.css  — depends on SchedulingMain.css variables
+   ============================================================ */
+
+/* ── Card shell ─────────────────────────────────────────────── */
+.schedule-card{
+  margin-top: 25px;
+}
+
+.schedule-card.MuiCard-root {
+  font-family        : var(--font-body);
+  border-radius      : var(--radius-lg);
+  border             : 1px solid var(--clinic-border);
+  box-shadow         : var(--clinic-shadow-sm);
+  background         : var(--clinic-white);
+  overflow           : hidden;
+  transition         : box-shadow var(--transition), transform var(--transition);
+}
+
+
+
+/* ── Header ─────────────────────────────────────────────────── */
+.schedule-card .MuiCardHeader-root {
+  background  : var(--clinic-navy);
+  padding     : 12px 14px;
+  align-items : flex-start;
+}
+
+.schedule-card .MuiCardHeader-avatar {
+  margin-right : 10px;
+  margin-top   : 2px;
+}
+
+.schedule-card .MuiCardHeader-avatar .MuiAvatar-root {
+  width            : 36px;
+  height           : 36px;
+  background-color : var(--clinic-sage) !important;
+}
+
+.schedule-card .MuiCardHeader-avatar .MuiAvatar-root svg {
+  font-size : 18px;
+  color     : var(--clinic-white);
+}
+
+.schedule-card .MuiCardHeader-content {
+  overflow : hidden;
+}
+
+.schedule-card .MuiCardHeader-title {
+  font-family   : var(--font-display);
+  font-size     : 1rem;
+  font-weight   : 400;
+  color         : var(--clinic-white);
+  white-space   : nowrap;
+  overflow      : hidden;
+  text-overflow : ellipsis;
+}
+
+.schedule-card .MuiCardHeader-subheader {
+  font-family    : var(--font-body);
+  font-size      : 0.7rem;
+  font-weight    : 500;
+  letter-spacing : 0.09em;
+  text-transform : uppercase;
+  color          : var(--clinic-sage-light);
+  margin-top     : 2px;
+}
+
+.schedule-card .MuiCardHeader-action {
+  margin-top   : 2px;
+  margin-right : -4px;
+}
+
+.schedule-card .MuiCardHeader-action svg {
+  font-size  : 1.2rem;
+  color      : rgba(255, 255, 255, 0.4);
+  cursor     : pointer;
+  transition : color var(--transition);
+}
+
+.schedule-card .MuiCardHeader-action svg:hover {
+  color : rgba(255, 100, 100, 0.85);
+}
+
+/* ── Card content ────────────────────────────────────────────── */
+.schedule-card .MuiCardContent-root {
+  background : var(--clinic-surface);
+  padding    : 12px 14px 6px !important;
+}
+
+/* ── CardSlot base ───────────────────────────────────────────── */
+.card-slot {
+  display       : flex;
+  align-items   : center;
+  gap           : 9px;
+  padding       : 5px 8px;
+  border-radius : var(--radius-sm);
+  font-family   : var(--font-body);
+  font-size     : 0.84rem;
+  font-weight   : 400;
+  color         : var(--clinic-text);
+  margin-bottom : 3px;
+}
+
+.card-slot span:first-child {
+  display     : flex;
+  align-items : center;
+  flex-shrink : 0;
+  color       : var(--clinic-text-muted);
+}
+
+.card-slot span:first-child svg {
+  font-size : 0.95rem;
+}
+
+/* ── Date slot ───────────────────────────────────────────────── */
+.card-slot--date {
+  background : var(--clinic-navy-faint);
+}
+
+.card-slot--date span:first-child svg {
+  color : var(--clinic-navy);
+}
+
+.card-slot--date span:last-child {
+  font-family : var(--font-display);
+  font-size   : 0.9rem;
+  color       : var(--clinic-navy);
+}
+
+/* ── Time slot ───────────────────────────────────────────────── */
+.card-slot--time {
+  background : var(--clinic-sage-faint);
+}
+
+.card-slot--time span:first-child svg {
+  color : var(--clinic-sage);
+}
+
+.card-slot--time span:last-child {
+  font-weight    : 600;
+  color          : var(--clinic-navy);
+  letter-spacing : 0.02em;
+}
+
+/* ── Duration slot ───────────────────────────────────────────── */
+.card-slot--duration span:first-child svg {
+  color : var(--clinic-text-muted);
+}
+
+.card-slot--duration span:last-child {
+  font-size : 0.8rem;
+  color     : var(--clinic-text-muted);
+}
+
+/* ── Fees slot ───────────────────────────────────────────────── */
+.card-slot--fees {
+  background : var(--clinic-navy-faint);
+  margin-top : 4px;
+}
+
+.card-slot--fees span:first-child svg {
+  color : var(--clinic-sage);
+}
+
+.card-slot--fees span:last-child {
+  font-weight : 600;
+  color       : var(--clinic-navy);
+}
+
+/* ── CardActions (expand row) ────────────────────────────────── */
+.schedule-card .MuiCardActions-root {
+  background : var(--clinic-surface);
+  padding    : 0 6px 4px;
+  border-top : 1px solid var(--clinic-border);
+}
+
+.schedule-card .MuiCardActions-root .MuiIconButton-root {
+  color      : var(--clinic-sage);
+  transition : color var(--transition), background var(--transition);
+}
+
+
+
+/* ── Collapse / Notes section ────────────────────────────────── */
+.schedule-card .MuiCollapse-root .MuiCardContent-root {
+  background : var(--clinic-white);
+  border-top : 1px dashed var(--clinic-border);
+  padding    : 12px 14px !important;
+}
+
+.schedule-card .MuiCollapse-root .MuiTypography-root:first-of-type {
+  font-family    : var(--font-display);
+  font-size      : 0.8rem;
+  font-style     : italic;
+  color          : var(--clinic-text-muted);
+  letter-spacing : 0.05em;
+  margin-bottom  : 6px !important;
+}
+
+.schedule-card .MuiCollapse-root .MuiTypography-root:last-of-type {
+  font-family : var(--font-body);
+  font-size   : 0.84rem;
+  font-weight : 300;
+  color       : var(--clinic-text);
+  line-height : 1.6;
+}

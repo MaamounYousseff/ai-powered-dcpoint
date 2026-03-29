@@ -1,0 +1,268 @@
+/* ── Table Wrapper ─────────────────────────────────────────── */
+.table-wrapper {
+  font-family: var(--font-body);
+  color: var(--clinic-text);
+}
+
+/* ── Top header row (title + count) ────────────────────────── */
+.table-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding: 0 0.25rem;
+}
+
+.table-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--clinic-navy);
+  letter-spacing: -0.3px;
+}
+
+.record-count {
+  font-size: 12px;
+  color: var(--clinic-text-muted);
+  background: var(--clinic-navy-faint);
+  border: 1px solid var(--clinic-border);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-weight: 500;
+}
+/* ── Table container ───────────────────────────────────────── */
+.sched-table-container {
+  overflow: hidden;
+  box-shadow: var(--clinic-shadow-sm);
+  border: 1px solid var(--clinic-border);
+  background: var(--clinic-white);
+}
+
+/* ── Override MUI Paper background ────────────────────────── */
+.sched-table-container .MuiPaper-root {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* ── Table Head ────────────────────────────────────────────── */
+.sched-table-container thead {
+  background: var(--clinic-white);
+  border-bottom: 2px solid var(--clinic-sage);
+}
+
+.sched-table-container thead th,
+.sched-table-container .MuiTableCell-head {
+  color: var(--clinic-navy) !important;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── Table Body rows ───────────────────────────────────────── */
+.sched-table-container tbody tr {
+  transition: background var(--transition);
+}
+
+.sched-table-container tbody tr:hover {
+  background: var(--clinic-sage-faint);
+}
+
+.sched-table-container tbody tr:not(:last-child) {
+  border-bottom: 1px solid var(--clinic-border);
+}
+
+.sched-table-container tbody td,
+.sched-table-container .MuiTableCell-body {
+  color: var(--clinic-text);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+}
+.sched-th {
+  font-family: var(--font-body) !important;
+  font-weight: 500 !important;
+  font-size: 11.5px !important;
+  letter-spacing: 0.6px !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  white-space: nowrap;
+  border: none !important;
+}
+
+.sched-th--center {
+  text-align: center !important;
+}
+
+/* ── Table Rows ────────────────────────────────────────────── */
+.sched-row {
+  border-bottom: 1px solid var(--clinic-border) !important;
+  transition: background var(--transition);
+}
+
+.sched-row:hover {
+  background: var(--clinic-navy-faint) !important;
+}
+
+.sched-row td {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--clinic-text);
+  vertical-align: middle;
+}
+
+/* ── Date cell ─────────────────────────────────────────────── */
+.td-date .date-main {
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--clinic-navy);
+}
+
+.td-date .date-day {
+  font-size: 11.5px;
+  color: var(--clinic-text-muted);
+  margin-top: 2px;
+}
+
+/* ── Time cell ─────────────────────────────────────────────── */
+.td-time .time-start {
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--clinic-text);
+}
+
+.td-time .time-end {
+  font-size: 11.5px;
+  color: var(--clinic-text-muted);
+  margin-top: 2px;
+}
+
+.td-time .time-duration {
+  display: inline-block;
+  font-size: 10.5px;
+  color: var(--clinic-sage);
+  font-weight: 500;
+  margin-top: 3px;
+}
+
+/* ── Patient cell ──────────────────────────────────────────── */
+.patient-name {
+  font-weight: 500;
+  color: var(--clinic-navy);
+}
+
+/* ── Type badge ────────────────────────────────────────────── */
+.type-badge {
+  display: inline-block;
+  background: var(--clinic-sage-faint);
+  color: var(--clinic-sage);
+  border: 1px solid rgba(74, 155, 142, 0.25);
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 3px 10px;
+  white-space: nowrap;
+  text-transform: capitalize;
+}
+
+/* ── Fees cell ─────────────────────────────────────────────── */
+.fees-cell {
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  color: var(--clinic-navy) !important;
+}
+
+.fees-cell .currency {
+  font-size: 11px;
+  color: var(--clinic-text-muted);
+  font-weight: 400;
+  margin-right: 1px;
+}
+
+/* ── Notes cell ────────────────────────────────────────────── */
+.notes-cell {
+  max-width: 140px;
+  color: var(--clinic-text-muted) !important;
+  font-size: 12.5px !important;
+  font-style: italic;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.notes-empty {
+  color: var(--clinic-border);
+  font-style: normal;
+  font-size: 11px;
+}
+
+/* ── Actions cell ──────────────────────────────────────────── */
+.actions-cell {
+  text-align: center !important;
+}
+
+/* ── Delete button ─────────────────────────────────────────── */
+.btn-delete {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: 1px solid rgba(200, 60, 60, 0.3);
+  color: #c0392b;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.btn-delete:hover {
+  background: #fdf0ef;
+  border-color: #c0392b;
+  color: #9b2d2d;
+  transform: scale(1.02);
+}
+
+.btn-delete:active {
+  transform: scale(0.97);
+}
+
+.btn-delete svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+
+
+
+
+
+@media (min-width: 768px) {
+    .sched-table-container {
+        margin: 0 44px;
+    }
+}
+
+
+@media (min-width: 1280px) {
+    .sched-table-container {
+        margin: 0 72px;
+    }
+}
+
+
+
+@media (min-width: 1600px) {
+    .sched-table-container {
+        margin: 0 100px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .sched-table-container {
+        margin: 0 140px;
+    }
+}

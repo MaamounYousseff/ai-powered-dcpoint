@@ -1,0 +1,580 @@
+
+
+
+/* ── Layout wrapper ────────────────────────────────────────── */
+.scheduling-wrapper {
+  display          : flex;
+  flex-direction   : column;
+  min-height       : 100%;
+  background       : var(--clinic-white);
+  font-family      : var(--font-body);
+  color            : var(--clinic-text);
+}
+
+.scheduling-main {
+  flex            : 1;
+  margin          : 0 0;
+  width           : 100%;
+  animation       : fadeSlideIn 0.45s ease both;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* ── Section labels (DcLabel) ──────────────────────────────── */
+
+/* Section header labels (those with an icon slot) */
+.scheduling-main .dc-label-section {
+  display      : flex;
+  align-items  : center;
+  gap          : 8px;
+  font-family  : var(--font-display);
+  font-size    : 1.15rem;
+  color        : var(--clinic-navy);
+  letter-spacing: 0.01em;
+}
+
+.scheduling-main .dc-label-section svg {
+  color : var(--clinic-sage);
+  width : 18px;
+  height: 18px;
+}
+
+/* Field labels — unified class for all form field labels */
+.scheduling-main .dc-label-field {
+  display        : block;
+  font-family    : var(--font-body);
+  font-size      : 0.75rem;
+  font-weight    : 500;
+  letter-spacing : 0.07em;
+  text-transform : uppercase;
+  color          : var(--clinic-navy);
+  opacity        : 0.65;
+  margin-bottom  : 6px;
+  
+}
+
+/* ── Input rows ────────────────────────────────────────────── */
+.patient-name-row {
+  display : flex;
+  gap     : 14px;
+}
+
+.phone-row {
+  display        : flex;
+  flex-direction : column;
+  gap            : 2px;
+}
+
+/* ── MUI TextField overrides ───────────────────────────────── */
+.scheduling-main .MuiTextField-root .MuiOutlinedInput-root {
+  font-family      : var(--font-body) !important;
+  border-radius    : var(--radius-sm) !important;
+  background       : var(--clinic-sage-faint);
+  transition       : box-shadow var(--transition), border-color var(--transition);
+}
+
+.scheduling-main .MuiTextField-root .MuiOutlinedInput-notchedOutline {
+  border-color : var(--clinic-border) !important;
+  transition   : border-color var(--transition);
+}
+
+.scheduling-main .MuiTextField-root .MuiOutlinedInput-root:hover
+  .MuiOutlinedInput-notchedOutline {
+  border-color : var(--clinic-sage-light) !important;
+}
+
+.scheduling-main .MuiTextField-root .MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color : var(--clinic-sage) !important;
+  border-width : 2px !important;
+}
+
+.scheduling-main .MuiTextField-root .MuiOutlinedInput-root.Mui-focused {
+  box-shadow: 0 0 0 4px rgba(74, 155, 142, 0.12);
+}
+
+.scheduling-main .MuiInputBase-input {
+  font-family : var(--font-body) !important;
+  font-size   : 0.92rem !important;
+  color       : var(--clinic-text) !important;
+}
+
+.scheduling-main .MuiInputBase-input::placeholder {
+  color   : var(--clinic-text-muted) !important;
+  opacity : 1 !important;
+}
+
+/* Start adornment icons */
+.scheduling-main .MuiInputAdornment-root svg {
+  color  : var(--clinic-sage);
+  width  : 16px;
+  height : 16px;
+}
+
+/* ── Section divider ───────────────────────────────────────── */
+.section-divider {
+  border     : none;
+  border-top : 2px solid var(--clinic-navy-faint);
+  margin     : 28px 0;
+  position   : relative;
+}
+
+.section-divider::before {
+  content          : '';
+  position         : absolute;
+  left             : 0;
+  top              : -2px;
+  width            : 48px;
+  height           : 2px;
+  background       : var(--clinic-sage);
+  border-radius    : 2px;
+}
+
+/* ── DatePicker additional class ───────────────────────────── */
+.scheduling-date-picker {
+  display       : inline-flex;
+  flex-direction: column;
+  width         : 100%;
+}
+
+.scheduling-date-picker .date-group {
+  display          : flex;
+  align-items      : center;
+  background       : var(--clinic-sage-faint);
+  border           : 1.5px solid var(--clinic-border);
+  border-radius    : var(--radius-sm);
+  padding          : 0 10px;
+  height           : 40px;
+  transition       : border-color var(--transition), box-shadow var(--transition);
+  font-family      : var(--font-body);
+  font-size        : 0.92rem;
+  color            : var(--clinic-text);
+  cursor           : text;
+}
+
+.scheduling-date-picker .date-group:hover {
+  border-color : var(--clinic-sage-light);
+}
+
+.scheduling-date-picker .date-group:focus-within {
+  border-color : var(--clinic-sage);
+  border-width : 2px;
+  box-shadow   : 0 0 0 4px rgba(74, 155, 142, 0.12);
+}
+
+.scheduling-date-picker .date-segment {
+  padding      : 2px 3px;
+  border-radius: 4px;
+  caret-color  : transparent;
+  color        : var(--clinic-text);
+  outline      : none;
+}
+
+.scheduling-date-picker .date-segment:focus {
+  background : rgba(74, 155, 142, 0.15);
+  color      : var(--clinic-navy);
+}
+
+.scheduling-date-picker .field-Button {
+  margin-left      : auto;
+  padding          : 4px 10px;
+  border-radius    : var(--radius-sm);
+  background       : var(--clinic-navy-faint);
+  border           : none;
+  color            : var(--clinic-navy);
+  font-size        : 0.75rem;
+  font-weight      : 600;
+  cursor           : pointer;
+  transition       : background var(--transition), color var(--transition);
+  letter-spacing   : 0.04em;
+}
+
+.scheduling-date-picker .field-Button:hover {
+  background : var(--clinic-sage-faint);
+  color      : var(--clinic-sage);
+}
+
+/* ── Popover — rendered in a Portal, targeted globally ─────── */
+.react-aria-Popover,
+.popover {
+  background    : var(--clinic-white) !important;
+  border        : 1.5px solid var(--clinic-border) !important;
+  border-radius : var(--radius-md) !important;
+  box-shadow    : 0 8px 32px rgba(27, 58, 92, 0.14) !important;
+  padding       : 16px !important;
+  z-index       : 9999 !important;
+  min-width     : 280px !important;
+  animation     : popoverIn 0.18s ease both;
+}
+
+@keyframes popoverIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* ── Calendar inside popover ───────────────────────────────── */
+.react-aria-Popover .calendar,
+.popover .calendar {
+  font-family : var(--font-body);
+  font-size   : 0.88rem;
+  width       : 100%;
+}
+
+.react-aria-Popover .calendar-header,
+.popover .calendar-header {
+  display         : flex;
+  align-items     : center;
+  justify-content : space-between;
+  margin-bottom   : 10px;
+  padding-bottom  : 8px;
+  border-bottom   : 1px solid var(--clinic-navy-faint);
+}
+
+.react-aria-Popover .calendar-heading,
+.popover .calendar-heading {
+  font-family  : var(--font-display);
+  font-size    : 1rem;
+  color        : var(--clinic-navy);
+  font-weight  : normal;
+}
+
+.react-aria-Popover .calendar-nav-btn,
+.popover .calendar-nav-btn {
+  background    : transparent;
+  border        : none;
+  border-radius : var(--radius-sm);
+  width         : 28px;
+  height        : 28px;
+  display       : flex;
+  align-items   : center;
+  justify-content: center;
+  cursor        : pointer;
+  color         : var(--clinic-navy);
+  font-size     : 0.85rem;
+  font-weight   : 700;
+  transition    : background var(--transition), color var(--transition);
+}
+
+.react-aria-Popover .calendar-nav-btn:hover,
+.popover .calendar-nav-btn:hover {
+  background : var(--clinic-sage-faint);
+  color      : var(--clinic-sage);
+}
+
+.react-aria-Popover .calendar-grid,
+.popover .calendar-grid {
+  width           : 100%;
+  border-collapse : separate;
+  border-spacing  : 3px;
+}
+
+.react-aria-Popover .calendar-cell,
+.popover .calendar-cell {
+  width         : 34px;
+  height        : 34px;
+  border-radius : var(--radius-sm);
+  text-align    : center;
+  line-height   : 34px;
+  cursor        : pointer;
+  transition    : background var(--transition), color var(--transition);
+  outline       : none;
+  color         : var(--clinic-text);
+  font-size     : 0.85rem;
+}
+
+.react-aria-Popover .calendar-cell:hover,
+.popover .calendar-cell:hover {
+  background : var(--clinic-sage-faint);
+  color      : var(--clinic-sage);
+}
+
+.react-aria-Popover .calendar-cell[data-selected],
+.popover .calendar-cell[data-selected] {
+  background : var(--clinic-sage);
+  color      : var(--clinic-white);
+  font-weight: 600;
+}
+
+.react-aria-Popover .calendar-cell[data-today],
+.popover .calendar-cell[data-today] {
+  border      : 2px solid var(--clinic-sage-light);
+  font-weight : 700;
+  color       : var(--clinic-navy);
+}
+
+.react-aria-Popover .calendar-cell[data-outside-month],
+.popover .calendar-cell[data-outside-month] {
+  color   : var(--clinic-border);
+  cursor  : default;
+}
+
+.react-aria-Popover .calendar-cell[data-disabled],
+.popover .calendar-cell[data-disabled] {
+  opacity : 0.35;
+  cursor  : not-allowed;
+}
+
+/* ── TimeField additional class ────────────────────────────── */
+.scheduling-time-field {
+  display       : inline-flex;
+  width         : 100%;
+}
+
+.scheduling-time-field .time-input {
+  display          : flex;
+  align-items      : center;
+  background       : var(--clinic-sage-faint);
+  border           : 1.5px solid var(--clinic-border);
+  border-radius    : var(--radius-sm);
+  padding          : 0 12px;
+  height           : 40px;
+  width            : 100%;
+  font-family      : var(--font-body);
+  font-size        : 0.92rem;
+  color            : var(--clinic-text);
+  transition       : border-color var(--transition), box-shadow var(--transition);
+  cursor           : text;
+  gap              : 2px;
+}
+
+.scheduling-time-field .time-input:focus-within {
+  border-color : var(--clinic-sage);
+  border-width : 2px;
+  box-shadow   : 0 0 0 4px rgba(74, 155, 142, 0.12);
+}
+
+.scheduling-time-field .time-segment {
+  padding       : 2px 4px;
+  border-radius : 4px;
+  color         : var(--clinic-text);
+  outline       : none;
+  caret-color   : transparent;
+}
+
+.scheduling-time-field .time-segment:focus {
+  background : rgba(74, 155, 142, 0.15);
+  color      : var(--clinic-navy);
+}
+
+/* ── DcComboBox (MUI Autocomplete) ───────────────────────────── */
+
+/* Root autocomplete container */
+.scheduling-main .MuiAutocomplete-root {
+  width : 100%;
+}
+
+/* The inner TextField input root */
+.scheduling-main .MuiAutocomplete-root .MuiOutlinedInput-root {
+  font-family   : var(--font-body) !important;
+  font-size     : 0.92rem !important;
+  border-radius : var(--radius-sm) !important;
+  background    : var(--clinic-sage-faint) !important;
+  color         : var(--clinic-text) !important;
+  padding-right : 10px !important;
+}
+
+/* Default border */
+.scheduling-main .MuiAutocomplete-root .MuiOutlinedInput-notchedOutline {
+  border-color : var(--clinic-border) !important;
+  transition   : border-color var(--transition) !important;
+}
+
+/* Hover border */
+.scheduling-main .MuiAutocomplete-root .MuiOutlinedInput-root:hover
+  .MuiOutlinedInput-notchedOutline {
+  border-color : var(--clinic-sage-light) !important;
+}
+
+/* Focused border + glow — no more MUI blue */
+.scheduling-main .MuiAutocomplete-root .MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color : var(--clinic-sage) !important;
+  border-width : 2px !important;
+}
+
+.scheduling-main .MuiAutocomplete-root .MuiOutlinedInput-root.Mui-focused {
+  box-shadow : 0 0 0 4px rgba(74, 155, 142, 0.12) !important;
+}
+
+/* Label (placeholder text above field) */
+.scheduling-main .MuiAutocomplete-root .MuiInputLabel-root {
+  font-family : var(--font-body) !important;
+  font-size   : 0.92rem !important;
+  color       : var(--clinic-text-muted) !important;
+}
+
+/* Label when focused — navy, not MUI blue */
+.scheduling-main .MuiAutocomplete-root .MuiInputLabel-root.Mui-focused {
+  color : var(--clinic-sage) !important;
+}
+
+/* The typed text inside */
+.scheduling-main .MuiAutocomplete-root .MuiInputBase-input {
+  font-family : var(--font-body) !important;
+  font-size   : 0.92rem !important;
+  color       : var(--clinic-text) !important;
+}
+
+/* Clear + arrow icon buttons */
+.scheduling-main .MuiAutocomplete-root .MuiAutocomplete-endAdornment button,
+.scheduling-main .MuiAutocomplete-root .MuiAutocomplete-clearIndicator,
+.scheduling-main .MuiAutocomplete-root .MuiAutocomplete-popupIndicator {
+  color : var(--clinic-text-muted) !important;
+  transition : color var(--transition) !important;
+}
+
+.scheduling-main .MuiAutocomplete-root .MuiAutocomplete-popupIndicator:hover,
+.scheduling-main .MuiAutocomplete-root .MuiAutocomplete-clearIndicator:hover {
+  color       : var(--clinic-sage) !important;
+  background  : var(--clinic-sage-faint) !important;
+}
+
+/* ── Autocomplete dropdown (rendered in a Portal, outside .scheduling-main) */
+.MuiAutocomplete-popper .MuiPaper-root {
+  font-family   : var(--font-body) !important;
+  border        : 1.5px solid var(--clinic-border) !important;
+  border-radius : var(--radius-sm) !important;
+  box-shadow    : 0 6px 24px rgba(27, 58, 92, 0.12) !important;
+  color         : var(--clinic-text) !important;
+}
+
+/* Each option row */
+.MuiAutocomplete-popper .MuiAutocomplete-option {
+  font-family : var(--font-body) !important;
+  font-size   : 0.92rem !important;
+  color       : var(--clinic-text) !important;
+  padding     : 9px 14px !important;
+  transition  : background var(--transition) !important;
+}
+
+/* Hover state — sage faint, not MUI blue */
+.MuiAutocomplete-popper .MuiAutocomplete-option:hover,
+.MuiAutocomplete-popper .MuiAutocomplete-option[data-focus="true"],
+.MuiAutocomplete-popper
+  .MuiAutocomplete-option.Mui-focused {
+  background : var(--clinic-sage-faint) !important;
+  color      : var(--clinic-sage) !important;
+}
+
+/* Selected option */
+.MuiAutocomplete-popper
+  .MuiAutocomplete-option[aria-selected="true"] {
+  background  : var(--clinic-sage-faint) !important;
+  color       : var(--clinic-sage) !important;
+  font-weight : 600 !important;
+}
+
+/* No-options message */
+.MuiAutocomplete-popper .MuiAutocomplete-noOptions {
+  font-family : var(--font-body) !important;
+  font-size   : 0.88rem !important;
+  color       : var(--clinic-text-muted) !important;
+  padding     : 10px 14px !important;
+}
+
+
+.schedule-btn-container{
+  text-align: center;
+    margin-top: 20px;
+}
+
+/* create btn-schedule */
+
+/* ── Spacing helpers ─────────────────────────────────────────── */
+.scheduling-main br {
+  display       : block;
+  margin-bottom : 0;
+  line-height   : 10px;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 520px) {
+
+  .patient-name-row {
+    flex-direction : column;
+    gap            : 12px;
+  }
+
+  .scheduling-main{
+    margin: 0;
+  }
+
+}
+
+
+/* ── Schedule Action Buttons ───────────────────────────────── */
+
+.schedule-main-btn {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.schedule-main-btn .btn-schedule,
+.schedule-main-btn .btn-cancel {
+  flex: 1 1 0;
+  min-width: 120px;
+  padding: 10px 20px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition),
+              border-color var(--transition),
+              color var(--transition),
+              transform var(--transition);
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Primary — Schedule */
+.btn-schedule {
+  background-color: var(--clinic-sage);
+  color: var(--clinic-white);
+  border: 1.5px solid var(--clinic-sage);
+}
+
+.btn-schedule:hover {
+  background-color: var(--clinic-sage-light);
+  border-color: var(--clinic-sage-light);
+}
+
+.btn-schedule:active {
+  transform: scale(0.97);
+  background-color: var(--clinic-sage);
+}
+
+/* Secondary — Cancel */
+.btn-cancel {
+  background-color: transparent;
+  color: var(--clinic-text-muted);
+  border: 1.5px solid var(--clinic-border);
+}
+
+.btn-cancel:hover {
+  background-color: var(--clinic-navy-faint);
+  border-color: var(--clinic-navy);
+  color: var(--clinic-navy);
+}
+
+.btn-cancel:active {
+  transform: scale(0.97);
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+
+@media (max-width: 400px) {
+  .schedule-main-btn {
+    flex-direction: column;
+  }
+
+  .schedule-main-btn .btn-schedule,
+  .schedule-main-btn .btn-cancel {
+    width: 100%;
+  }
+}

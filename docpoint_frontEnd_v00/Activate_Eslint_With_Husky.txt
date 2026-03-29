@@ -1,0 +1,89 @@
+Step 1 — Clean everything
+	rm -rf node_modules package-lock.json .eslintrc.cjs eslint.config.js eslint.config.mjs
+
+
+Step 2 — Install ESLint v9 + all needed plugins
+	npm uninstall eslint
+	npm install --save-dev eslint@^9 @eslint/js typescript-eslint eslint-plugin-react eslint-plugin-react-hooks globals husky
+	npm install --save-dev husky
+	npx husky init	
+	npm install
+	
+Step 3 — Create eslint.config.js in root
+import js from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import reactPlugin from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import globals from 'globals';
+
+export default tseslint.config(
+  { ignores: ['dist', 'node_modules'] },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  {
+    files: ['**/*.{ts,tsx,js,jsx}'],
+    plugins: {
+      react: reactPlugin,
+      'react-hooks': reactHooks,
+    },
+    languageOptions: {
+      globals: { ...globals.browser },
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
+      },
+    },
+    rules: {
+      '@typescript-eslint/no-unused-vars': ['error', {
+        vars: 'all',
+        args: 'after-used',
+        ignoreRestSiblings: false,
+      }],
+      'no-unused-vars': 'off',
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+    },
+    settings: {
+      react: { version: 'detect' },
+    },
+  }
+);
+
+
+Step 4 — Update package.json scripts: 
+"scripts": {
+  "dev": "vite",
+  "build": "tsc -b && vite build",
+  "lint": "eslint .",
+  "preview": "vite preview",
+  "prepare": "husky"
+}
+
+
+Step 5 — Setup husky: 
+#!/usr/bin/env sh
+
+cd DocPoint || exit 1    !!!!!!!!!!!!!!!!! just put this line if the git in the top level path
+npm run prepare
+Then set the pre-commit hook: echo "npm run lint" > .husky/pre-commit
+
+Make it executable:
+git update-index --chmod=+x .husky/pre-commit
+
+
+Step 6 — Link Husky Trigger to Git HookPath : 
+git config core.hooksPath DocPoint/.husky
+validate : git config core.hooksPath
+
+
+Step 7 — Verify Eslint works:
+npm run lint
+
+
+Step 8 — Verify Husky Work : 
+put a message on the top in the .husky file : echo "🚀 Running ESLint before commit..." so it should be show 
+npm run lint
+
+Then 
+TEST EveryThink : 
+git add .
+git commit -m "test: husky + eslint"
